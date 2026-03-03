@@ -1,0 +1,55 @@
+\documentclass[12pt,a4paper,leqno,twoside,openany]{book}
+
+% \usepackage{graphicx} % Required for inserting images
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, bulgarian]{babel}
+\usepackage{graphicx, float}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage[centering]{geometry}
+
+\DeclareMathOperator{\gr}{Gr}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Univ}{X\times Y}
+\newcommand{\Point}{(\bar{x},\bar{y})}
+\newcommand{\Pointt}{(\bar{x}(t),\bar{y}(t))}
+\renewcommand{\Vec}{(v,w)}
+\newcommand{\Vect}{(v(t),w(t))}
+\newcommand{\Gr}{\gr F(\cdot, t)}
+\newcommand{\Set}{\widetilde{E}}
+\newcommand{\Ball}{\textbf{B}}
+\newcommand{\Tangent}{\hat T}
+
+% \frenchspacing
+\newtheorem{definition}{Дефиниция}[chapter]
+\newtheorem{proposition}[definition]{Твърдение}
+\newtheorem{theorem}[definition]{Теорема}
+\newtheorem{note}[definition]{Забележка}
+\newtheorem{lemma}[definition]{Лема}
+
+\title{Обобщение на дипломната ми работа}
+\author{Михаил Минков}
+
+\begin{document}
+
+\input{Title_pages.tex}
+
+\tableofcontents
+% \thispagestyle{empty}
+% \setcounter{page}{0}
+
+\input{intro.tex}
+\input{preliminary.tex}
+\input{result.tex}
+
+
+\bibliography{Optimization}
+\bibliographystyle{plain}
+
+\end{document}

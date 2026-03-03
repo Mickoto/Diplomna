@@ -1,0 +1,502 @@
+\chapter{Главното доказателство}
+
+Нека $F:\R^n\times [0,T]\rightrightarrows \R^n$ има непразни затворени образи и $F(x,t)$ е измеримо по $t$ и за всяко $t\in [0,T]$ $F(\cdot, t)$ е $l(t)$-липшицова за някое $l\in L^1([0,T])$.
+Нека $\Point\in\Univ$.
+
+Първо да докажем някои по-технически свойства, свързани с измеримост:
+\begin{lemma}
+    Нека $(v,w)\in X\times Y$. Тогава са измерими следните:
+    \begin{enumerate}
+        \item изображението $t \mapsto \Gr$
+        \item за всяко $\delta > 0$ изображението $G_{\delta}(t) := \bar{\Ball}_{\delta}(\Pointt)\cap\Gr$
+        \item за всеки $r,s > 0$ множеството
+            \begin{align*}
+                D_{r,s} = \{t\in [0,T]\mid\ &\forall z\in\bar{\Ball}_{r}(\Pointt)\cap\Gr\ \forall \tau\in(0,s)\\
+                  &[z + \tau \bar{\Ball}_{\varepsilon}(\Vect)]\cap\Gr\neq\emptyset\}.
+            \end{align*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    1) За всяко $x\in\R^n$ знаем, че $F(x,\cdot)$ е измеримо. Нека вземем функциите $f_n^x(t)$, т.ч. $F(x,t) = \overline{\{f^x_n(t) \mid n\in\N\}}$. Тогава
+    \[
+        \Gr = \overline{\{(q,f_n^q(t)) \mid n\in\N\ \&\ q\in\Q^n\}}
+    \]
+    Наистина ако $(x,y)\in\Gr$, поради непрекъснатостта на $F(\cdot, t)$, съществува $\delta_n > 0$, т.ч. $F(x,t) \subseteq F(x', t) + \frac{1}{n}\bar{\Ball}$ за всяко $x'\in \Ball_{\delta_n}(x)$.
+    Да изберем $q_n\in\Q^n$ т.ч. $\lVert q_n - x\rVert \leq \min\{\delta_n, \frac{1}{n}\}$ и $y_n\in F(q_n, t)$, т.ч. $\lVert y - y_n\rVert \leq \frac{1}{n}$.
+    Поради гъстотата на $f_i^{q_n}(t)$ в образа, можем да намерим $i_n$, т.ч. $\lVert f_{i_n}^{q_n}(t) - y_n \rVert \leq \frac{1}{n}$.
+    Тогава $(q_n, f_{i_n}^{q_n}(t)) \xrightarrow[n\to\infty]{} (x,y)$.
+    % \[
+    %     \lVert (q_n, f_{i_n}^{q_n}(t)) - (x,y)\rVert =
+    %     % \lVert q_n - x\rVert + \lVert f_{i_n}^{q_n} - y \rVert \leq
+    %     \lVert q_n - x\rVert + \lVert f_{i_n}^{q_n}(t) - y_n \rVert + \lVert y_n - y \rVert \leq
+    %     \frac{3}{n}
+    %     \xrightarrow[n\to\infty]{} 0
+    % \]
+    Обратното включване следва директно от затвореността на $\Gr$.\\
+    2) Теорема $\ref{MeasurableBall}$ ни дава измеримостта на $\bar{\Ball}_{\delta}(\Pointt)$, а Теорема $\ref{MeasurableCap}$ - измеримостта на сечението.\\
+    3) Да забележим, че условието
+    \[
+        [z + \tau \bar{\Ball}_{\varepsilon}(\Vect)]\cap\Gr\neq\emptyset
+    \]
+    е еквивалентно на
+    \[
+        f(z, \tau, t) := \frac{d(z+\tau\Vect, \Gr)}{\tau} \leq \varepsilon
+    \]
+    където $f(z,\tau,t)$ е непрекъсната по $z$ и $\tau$ и измерима по $t$.
+    Тогава
+    \[
+        D_{r,s} = \{t\in [0,T] \mid g(t) := \sup_{\substack{z\in G_r(t)\\\tau\in(0,s)}} f(z,\tau,t)\leq\varepsilon\}.
+    \]
+    Трябва само да се уверим, че $g$ е измерима.
+
+    Нека $h_n(t)$ са измерими функции т.ч. $G_r(t) = \overline{\{h_n(t) \mid n\in\N\}}$. Тогава
+    \[
+        \{ g(t) > \alpha \} = \bigcup_{\substack{n\in\N\\\tau\in(0,s)}} \{ f(h_n(t),\tau,t) > \alpha \}.
+    \]
+    Наистина, ако $g(t) > \alpha$, тогава съществуват $z_0\in G_r(t)$ и $\tau_0\in (0,s)$, т.ч. $f(z_0, \tau_0, t) > \alpha$.
+    Понеже $f$ е непрекъсната по $(z,\tau)$, то съществува $U$ - околност на $(z_0, \tau_0)$ в $G_r(t)\times (0,s)$, т.ч. $f(z,\tau,t) > \alpha$ за всяко $(z,\tau)\in U$.
+    Поради гъстотата можем да намерим $n\in\N$ и $\tau\in\Q$, т.ч. $(h_n(t), \tau)\in U$ и тогава $f(h_n(t), \tau, t) > \alpha$.
+    Другото включване е ясно.
+
+\end{proof}
+
+\begin{lemma} \label{L2}
+    Нека $(v,w)\in\Univ$, $E\subseteq [0,T]$ е измеримо и $\nu > 0$. Тогава съществува компакт $E'\subseteq E$ с $\mu(E\setminus E') < \nu$, т.ч. са измерими:
+    \begin{enumerate}
+        \item за всеки $\delta,\lambda,\varepsilon > 0$ изображенията $H_{\delta,\lambda,\varepsilon}:E'\rightrightarrows \R^n$ зададени с
+            \[
+                H_{\delta,\lambda,\varepsilon}(t) := \{z\in G_{\delta}(t) \mid [z + (0,\lambda)\Ball_{\varepsilon}(\Vect)]\cap\Gr = \emptyset\},
+            \]
+        \item за всяко $\delta,\lambda,\varepsilon>0$ множеството
+            \begin{align*}
+                L_{\delta,\lambda,\varepsilon}=\{t\in E' \mid\ &\exists z\in \Ball_{\delta}(\Pointt)\cap\Gr\\
+                   &[z + (0, \lambda)\Ball_{\varepsilon}(\Vect)\cap\Gr] = \emptyset\},
+            \end{align*}
+        \item за всяко $s>0$ множеството
+            \begin{align*}
+                E_s = \{t\in E' \mid \forall \delta > 0&\ \exists z \in G_{\delta}(t)\ \exists \lambda > 0\\
+                 &[z + (0, \lambda)\Ball_s(\Vect)]\cap\Gr = \emptyset\}.
+                \end{align*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Да забележим първо, че условието
+    \[
+        [z+(0, \lambda)\Ball_{\varepsilon}(\Vect)]\cap\Gr=\emptyset
+    \]
+    е еквивалентно на
+    \[
+        g(t, z):=\inf_{\tau\in(0,\lambda)}\frac{d(z+\tau\Vect, \Gr)}{\tau} \geq \varepsilon.
+    \]
+    $g(t,z)$ е измерима по $t$ и полунепрекъсната отгоре по $z$.
+    Измеримостта се показва аналогично на горната теорема.
+    За полунепрекъснатостта е достатъчно да забележим, че ако $f(x,y)$ е непрекъсната по $x$,\\ $g(x) = \inf_{y\in A} f(x,y)$ и $\varepsilon > 0$, имаме
+    \[
+        g(x) + \varepsilon < f(x,y_0) = \limsup_{x'\to x} f(x',y_0) \leq \limsup_{x'\to x} g(x')
+    \]
+    Оставяйки $\varepsilon\to 0$, получаваме искания резултат.
+    Тогава според теорема \ref{Scorza} съществува компакт $E'\subseteq E$ с $\mu(E\setminus E')<\nu$, т.ч. функцията $g$ е измерима върху $E'\times\R^n $.
+    \begin{enumerate}
+        \item
+            Графиката на $H_{\delta,\lambda,\varepsilon}$ можем да представим като
+            \small{
+            \[
+                Gr H_{\delta,\lambda,\varepsilon} = \{(t,z) \mid (t,z)\in Gr G_{\delta}\ \&\ g(t,z)\geq\varepsilon\} =
+                Gr G_{\delta} \cap g\vert_{E'\times\R^n}^{-1}([\varepsilon, \infty))
+            \]
+            }
+            което е $\mathcal{L}\otimes\mathcal{B}$-измеримо.
+        \item
+            \[
+                L_{\delta,\lambda,\varepsilon} =
+                \{t\in E' \mid \exists z\in G_{\delta}(t)\ g(t,z)\geq\varepsilon\}=
+                dom(H_{\delta,\lambda,\varepsilon}),
+            \]
+            където $dom(H_{\delta,\lambda,\varepsilon}) = H_{\delta,\lambda,\varepsilon}^{-1}(\R^n)$ са измерими.
+        \item
+            \[
+                E_s =
+                \bigcap_{\delta\in\Q^+} \bigcup_{\lambda\in\Q^+} \{t\in E' \mid \exists z\in G_{\delta}(t)\ g(t,z)\geq s\} =
+                \bigcap_{\delta\in\Q^+} \bigcup_{\lambda\in\Q^+} L_{\delta,\lambda,s}
+            \]
+    \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    За всяко $(\bar{x},\bar{y})\in B$
+    \small
+    \begin{displaymath}
+        \Tangent_B(\Point) \subseteq \{ \Vec\in\Univ \mid \Vect\in T_{\Gr}(\Pointt) \text{ п.н. в } [0,T]\}.
+    \end{displaymath}
+\end{proposition}
+
+\begin{proof}
+    % фаза 1: да ограничим епсилон
+    Да допуснем, че $(v,w)\in\Univ$ не е в дясното множество.
+    Тогава според теорема \ref{Treiman} съществува $E\subseteq [0,T]$ с положителна мярка, т.ч. за всяко $t\in E$ съществува $\varepsilon_t > 0$, т.ч. за всяко $\delta > 0$ съществуват $(x,y)\in \Ball_\delta(\Pointt)\cap\Gr$ и $\lambda > 0$, т.ч.
+    \[
+        [(x,y) + (0, \lambda)\Ball_{\varepsilon_t}(\Vect)]\cap\Gr = \emptyset
+    \]
+    След евентуално свиване на $E$ (с $\nu = \frac{\mu(E)}{2}$) можем да предположим, че в $E$ измеримостите от теорема \ref{L2} са в сила.
+
+    Да разгледаме множествата
+    \begin{align*}
+        E_s = \{t\in E \mid \forall \delta > 0&\ \exists (x,y) \in \bar{\Ball}_\delta(\Pointt)\cap\Gr\ \exists \lambda > 0\\
+         &[(x,y) + (0, \lambda)\Ball_s(\Vect)]\cap\Gr = \emptyset\}.
+    \end{align*}
+    Забелязваме, че
+    \[
+        E_s \subseteq E_t,\ \text{когато}\ t\leq s,\ \text{както и}\ 
+        E = \bigcup_{n = 1}^{\infty} E_{\frac{1}{n}}
+    \]
+    и тогава
+    \[
+        0 < \mu(E) = \mu\left(\bigcup_{n=1}^{\infty} E_{\frac{1}{n}}\right) =
+        \lim_{n\to\infty} \mu(E_{\frac{1}{n}})
+    \]
+    и значи съществува някое $\varepsilon_0 = \frac{1}{n_0} > 0$, т.ч. $\mu(\bar{E}=E_{\varepsilon_0}) > 0$.\\
+    Така за всяко $t\in \bar{E}$ и $\delta > 0$ имаме:
+    \begin{align*}
+        \exists z \in \Ball_{\delta}(\Pointt)\cap&\Gr\ \exists \lambda > 0\\
+        &[z + (0, \lambda)\Ball_{\varepsilon_0}(\Vect)]\cap\Gr = \emptyset.
+    \end{align*}
+
+    Нека вземем $\delta = \frac{1}{k}$. Тогава за всяко $k\in\N$ и $t\in\bar{E}$ получаваме
+    \begin{align*}
+        \exists z \in \Ball_{\frac{1}{k}}(\Pointt)\cap&\Gr\ \exists \lambda > 0\\
+        &[z + (0, \lambda)\Ball_{\varepsilon_0}(\Vect)]\cap\Gr  = \emptyset.
+    \end{align*}
+
+    % фаза 2: да ограничим ламбда отдолу и да построим z
+    Нека $\bar{E}_0 = \bar{E}$. Строим множества $\bar{E}_k\subseteq \bar{E}$,$k\geq1$, реални числа $\{\lambda_k\}_{k\geq 1}$ и измерими функции $\{z_k\}_{k \geq 1}$ по следния начин:\\
+    Нека имаме $\bar{E}_k$.
+    Дефинираме
+    \begin{align*}
+        \Lambda_s=\{&t\in\bar{E}_k \mid \exists z\in \Ball_{\frac{1}{k+1}}(\Pointt)\cap\Gr\\
+        &[z + (0, s)\Ball_{\varepsilon_0}(\Vect)]\cap\Gr = \emptyset\} =
+        \bar{E}_k \cap L_{\frac{1}{k+1},s,\varepsilon_0}.
+    \end{align*}
+    Отново
+    \[
+        \Lambda_s \subseteq \Lambda_t,\ \text{когато}\ t\leq s,\ \text{както и}\ 
+        \bar{E}_k = \bigcup_{n = 1}^{\infty} \Lambda_{\frac{1}{n}}
+    \]
+    и значи
+    \[
+        \mu(\bar{E}_k) =
+        \mu\left(\bigcup_{n=1}^{\infty} \Lambda_{\frac{1}{n}}\right) =
+        \lim_{n\to\infty} \mu(\Lambda_{\frac{1}{n}})
+    \]
+    и значи има някое $n_0$, т.ч.
+    \[
+        \mu(\bar{E}_k\setminus\Lambda_\frac{1}{n_0})<\frac{\mu(\bar{E})}{2^{k+1}}.
+    \]
+    Дефинираме $\lambda_{k+1} = \frac{1}{n_0}$, $\bar{E}_{k+1}=\Lambda_{\lambda_{k+1}}$
+    % TODO: fix me
+    и взимаме измерима селекция $z_{k+1}(t) = (x_{k+1}(t),y_{k+1}(t)) \in H_{\frac{1}{k+1},\lambda_{k+1},\varepsilon_0}(t)$.\\
+
+    За така построените множества е вярно, че:
+    \[
+        \bar{E}_{k+1} \subseteq \bar{E}_k\ \text{за всяко}\ k\in\N,
+    \]
+    също за всяко $t\in\bar{E}_k$
+    \[
+        [z_k(t) + (0, \lambda_k)\Ball_{\varepsilon_0}(\Vect)]\cap\Gr = \emptyset,
+    \]
+    както и
+    \[
+        \mu(\bar{E}_k) =
+        \mu(\bar{E}) -\mu(\bar{E}\setminus\bar{E}_k) =
+        \mu(\bar{E}) - \sum_{i = 1}^k \mu(\bar{E}_{i-1}\setminus\bar{E}_i) >
+    \]
+    \[
+        \mu(\bar{E}) - \sum_{i = 1}^k \frac{\mu(\bar{E})}{2^{i+1}} >
+        \frac{\mu(\bar{E})}{2}
+    \]
+    Дефинираме $\Set=\bigcap_{k=1}^\infty \bar{E}_k$. Тогава $\mu(\Set)\geq\mu(\bar{E})/2>0$.\\
+    Ще използваме теорема \ref{Treiman} за да покажем, че $\Vec\notin \Tangent_B(\Point)$.\\
+    % фаза 3: довършваме
+    Нека $\varepsilon'=\frac{\varepsilon_0}{2}\min\{L,\frac{\mu(\Set)}{2}\}$ и $\delta > 0$ е произволно.\\
+    Дефинираме $(\tilde{x}_k, \tilde{y}_k) \in\Univ$ като
+    \[
+        (\tilde{x}_k(t), \tilde{y}_k(t))=
+        \begin{cases}
+            (x_k(t), y_k(t)), &\text{ ако } t\in \Set \\
+            \Pointt, &\text{ ако } t\notin \Set \\
+        \end{cases}
+    \]
+    Тогава
+    \[
+        (\tilde{x}_k(t), \tilde{y}_k(t))\in\Gr,
+    \]
+    \[
+        \lVert (\tilde{x}_k, \tilde{y}_k) - \Point \rVert =
+        L \lVert \tilde{x}_k - \bar{x} \rVert_\infty + \lVert \tilde{y}_k - \bar{y} \rVert_1 =
+    \]
+    \[
+        \sup_{t \in\Set}L\lVert \tilde{x}_k(t) - \bar{x}(t) \rVert + \int_{\Set}\lVert \tilde{y}_k(t) - \bar{y}(t) \rVert\leq
+    \]
+    \[
+        \sup_{t \in\Set}\lVert (\tilde{x}_k(t), \tilde{y}_k(t)) - \Pointt \rVert + \int_{\Set}\lVert (\tilde{x}_k(t), \tilde{y}_k(t)) - \Pointt \rVert\leq
+    \]
+    \[
+        \frac{1}{k} + \int_{\Set}\frac{1}{k} \leq \frac{1+T}{k}
+    \]
+    Взимаме $k>\frac{1+T}{\delta}$. Така $\lVert (\tilde{x}_k, \tilde{y}_k) - \Point\rVert < \delta$.
+    Ще докажем, че
+    \[
+        (\tilde{x}_k, \tilde{y}_k) + (0,\lambda_k)(\Ball_{\varepsilon'}(\Vec)) \cap B = \emptyset
+    \]
+    Нека $(p,q)\in \Ball_{\varepsilon'}(\Vec)$ е произволно. Това значи, че
+    \[
+        \lVert p - v\rVert_\infty \leq \frac{1}{L} \lVert (p,q) - \Vec\rVert <
+        \frac{\varepsilon'}{L} \leq \frac{\varepsilon_0}{2}
+    \]
+    както и, че ако разгледаме $C=\{t\in\Set \mid \lVert q(t) - w(t)\rVert \geq \frac{\varepsilon_0}{2}\}$, имаме
+    \[
+        \frac{\varepsilon_0}{2} \mu(C) = \int_C \frac{\varepsilon_0}{2}dt \leq
+        \int_C \lVert q(t) - w(t) \rVert dt \leq \lVert q - w \rVert_1 \leq \lVert (p,q)-\Vec \rVert <
+        \varepsilon'
+    \]
+    значи $\mu(C) < \frac{2 \varepsilon'}{\varepsilon_0}\leq \frac{\mu(\Set)}{2}$.
+    откъдето $\mu(\Set\setminus C)>0$.\\
+    За всяко $t\in\Set\setminus C$ имаме
+    \[
+        \lVert p(t) - v(t) \rVert < \frac{\varepsilon_0}{2}
+        \quad \text{и} \quad
+        \lVert q(t) - w(t) \rVert < \frac{\varepsilon_0}{2}
+    \]
+    и значи $\lVert (p(t),q(t)) - \Vect\rVert < \varepsilon_0$.
+    Но за $t\in\Set$ ние знаем, че
+    \[
+        [z_k(t) + (0, \lambda_k)\Ball_{\varepsilon_0}(\Vect)]\cap\Gr = \emptyset
+    \]
+    откъдето $(\tilde{x}_k, \tilde{y}_k) + (0,\lambda_k)(p,q)\cap B = \emptyset$. С това доказахме теоремата.
+\end{proof}
+
+Да забележим, че в доказателството на тази теорема никъде не ползвахме липшицовостта на изображението. Това не може да се каже за другата посока:
+
+\begin{proposition}
+    За всяко $(\bar{x},\bar{y})\in B$
+    \small
+    \begin{displaymath}
+        \Tangent_B(\Point) \supseteq \{ \Vec\in\Univ \mid \Vect\in T_{\Gr}(\Pointt) \text{ п.н. в } [0,T]\}.
+    \end{displaymath}
+\end{proposition}
+\begin{proof}
+    Да вземем произволно $\Vec$ от дясната страна.
+    Ще ползваме теорема \ref{Geometric} за да покажем, че $\Vec\in \Tangent_B(\Point)$. Нека $\varepsilon > 0$.
+
+    Понеже $l(t)$ и $\lVert w(t)\rVert$ са сумируеми, това означава, че са и равномерно интегруеми. В частност съществува $\nu > 0$, т.ч.
+    \[
+        \int_S l(t) dt < \frac{\varepsilon}{3(\lVert v \rVert_{\infty} + 1)}
+        \text{ и }
+        \int_S \lVert w(t)\rVert dt < \frac{\varepsilon}{3}
+        \text{ когато }
+        \mu(S)\leq\nu
+    \]
+
+    Имаме множество $E$ с $\mu(E)=T$, т.ч. за всяко $t\in E$, $\Vect\in \Tangent_{\Gr}(\Pointt)$.
+    Нека $\varepsilon' = \frac{\varepsilon}{3(L+T)}$, тогава от теорема \ref{Geometric} за всяко $t\in E$ съществуват $\delta > 0$ и $\lambda > 0$, т.ч. за всеки $(x,y)\in \bar{\Ball}_{\delta}(\Pointt)$ и $\tau\in(0,\lambda)$ имаме
+    \[
+        [(x,y)+ \tau \Ball_{\varepsilon'}(\Vect)]\cap\Gr\neq\emptyset
+    \]
+    Да разгледаме множествата
+    \begin{align*}
+        \Delta_{r,s} = \{t\in E\mid\ &\forall (x,y)\in\bar{\Ball}_{r}(\Pointt)\cap\Gr\ \forall \tau\in(0,s)\\
+        &[(x,y) + \tau \bar{\Ball}_{\varepsilon'}(\Vect)]\cap\Gr\neq\emptyset\}=
+        D_{r,s}\cap E.
+    \end{align*}
+    Тогава
+    \[
+        \Delta_{r,s} \subseteq \Delta_{r,t} \text{ за всяко } r \text{ и всяко } s \leq t
+    \]
+    \[
+        \Delta_{r,s} \subseteq \Delta_{t,s} \text{ за всяко } s \text{ и всяко } r \leq t
+    \]
+    \[
+        E = \bigcup_{n = 1}^{\infty} \bigcup_{m = 1}^{\infty} \Delta_{\frac{1}{n},\frac{1}{m}}
+    \]
+    откъдето
+    \[
+        T = \mu(E) =
+        \mu\left(\bigcup_{n = 1}^{\infty} \bigcup_{m = 1}^{\infty} \Delta_{\frac{1}{n},\frac{1}{m}}\right) =
+        \lim_{n\to\infty}\lim_{m\to\infty} \mu(\Delta_{\frac{1}{n},\frac{1}{m}})
+    \]
+    и значи съществуват $\delta_0 = \frac{1}{n_0}$ и $\lambda_0 = \frac{1}{m_0}$, т.ч.
+    \[
+        \mu(\bar{E} := \Delta_{\delta_0,\lambda_0}) \geq T - \frac{\nu}{2}.
+    \]
+    Взимаме $\delta = \min\{L, \frac{\nu}{2}\}\frac{\delta_0}{2}$ и $\lambda = \lambda_0$.
+    Сега нека $(x,y)\in \bar{\Ball}_{\delta}(\Point)$ и $\tau\in(0,\lambda)$ са произволни.
+
+    Да разгледаме множеството $E_0 = \{t\in E \mid \lVert y(t) - \bar{y}(t)\rVert > \frac{\delta_0}{2}\}$. За него имаме
+    \[
+        \delta \geq
+        \lVert y - \bar{y}\rVert_1 =
+        % \int_0^T \lVert y(t) - \bar{y}(t) \rVert dt \geq
+        \int_{E_0} \lVert y(t) - \bar{y}(t) \rVert dt \geq
+        \int_{E_0} \frac{\delta_0}{2} dt =
+        \frac{\delta_0}{2} \mu(E_0)
+    \]
+    Откъдето $\mu(E_0) \leq \frac{2\delta}{\delta_0} \leq \frac{\nu}{2}$.
+
+    Разбиваме $[0,T]$ на $\Set:=\bar{E}\setminus E_0$ и допълнението му - $\Set^C=\bar{E}^C \cup E_0$.\\
+    За всяко $t\in\Set$ имаме $\lVert y(t) - \bar{y}(t)\rVert \leq \frac{\delta_0}{2}$ както и
+    \[
+        L\frac{\delta_0}{2} \geq \delta \geq L\lVert x - \bar{x}\rVert_{\infty} \geq L\lVert x(t) - \bar{x}(t)\rVert
+    \]
+    и значи $(x(t), y(t))\in \bar{\Ball}_{\delta_0}(\Pointt)$. Но това значи, че
+    \[
+        [(x(t),y(t))+ \tau \Ball_{\varepsilon'}(\Vect)]\cap\Gr\neq\emptyset
+    \]
+
+    За допълнението на $\Set$ имаме
+    \[
+        \mu(\Set^C) \leq \mu(\bar{E}^C) + \mu(E_0) \leq
+        \frac{\nu}{2} + \frac{\nu}{2} = \nu.
+    \]
+    Там ще ползваме малко по-грубата оценка:
+    \[
+        d(y(t) + \tau w(t), F(x(t) + \tau v(t), t)) \leq
+    \]
+    \[
+        d(y(t) + \tau w(t), y(t)) + d(y(t), F(x(t), t)) + d_H(F(x(t), t), F(x(t) + \tau v(t), t)) \leq
+    \]
+    \[
+        \tau \lVert w(t)\rVert + 0 + l(t)\tau \lVert v(t)\rVert <
+        \tau (\lVert w(t)\rVert + l(t)(\lVert v(t)\rVert + 1)).
+    \]
+    Да положим $\mu(t) := \lVert w(t)\rVert + l(t)(\lVert v(t)\rVert + 1)$. Горната оценка ни дава
+    \[
+        [x(t) + \tau v(t), y(t) + \tau \mu(t) B(w(t))] \cap\Gr\neq\emptyset
+    \]
+
+    Строим изображението
+    \[
+        H(t) =
+        \begin{cases}
+            [(x(t),y(t))+ \tau \bar{\Ball}_{\varepsilon'}(\Vect)]\cap\Gr, &\text{ ако } t\in\Set\\
+            [x(t) + \tau v(t), y(t) + \tau \mu(t) \bar{\Ball}(w(t))] \cap\Gr, &\text{ ако } t\in\Set^C
+        \end{cases}
+        .
+    \]
+    От горните съображения $H$ е измеримо с непразни образи. Тогава можем да изберем измерима селекция $z(t)\in H(t)$. Избираме изображенията $p$ и $q$, така че да изпълняват $z(t) = (x(t) + \tau p(t), y(t) + \tau q(t))$.
+    За така избраните изображения е ясно, че $(x,y) + \tau (p,q)\in B$. Остава да показжем само, че $(p,q)\in \bar{\Ball}_{\varepsilon}(\Vec)$. Пресмятаме:
+    \[
+        \lVert (p, q) - (v, w)\rVert =
+        L \lVert p - v \rVert_{\infty} + \lVert q - w\rVert_1 =
+    \]
+    \[
+        L \sup_{x\in\Set} \lVert p(t) - v(t)\rVert + \int_{\Set} \lVert q(t) - w(t)\rVert dt + \int_{\Set^C} \lVert q(t) - w(t)\rVert dt \leq
+    \]
+    \[
+        L \varepsilon' + \int_{\Set} \varepsilon' dt + \int_{\Set^C} \mu(t) dt \leq
+        (L + T) \varepsilon' + \int_{\Set^C} \lVert w(t)\rVert + l(t) (\lVert v(t)\rVert + 1) dt \leq
+    \]
+    \[
+        \frac{\varepsilon}{3} + \int_{\Set^C} \lVert w(t)\rVert dt + (\lVert v(t)\rVert_{\infty} + 1) \int_{\Set^C} l(t) dt \leq
+        \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon
+    \]
+\end{proof}
+
+\noindent И така доказахме
+
+\begin{theorem} \label{BigCone}
+    \small
+    \begin{displaymath}
+        \Tangent_B(\Point) = \{ \Vec\in\Univ \mid \Vect\in T_{\Gr}(\Pointt) \text{ п.н. в } [0,T]\}.
+    \end{displaymath}
+\end{theorem}
+
+Остана само да докажем
+
+\begin{theorem}
+    Нека $\bar{x}$ е решение на (1). Тогава $A$ и $B$ са субтрансверзални в точката $(\bar{x},\dot{\bar{x}})\in A\cap B$.
+\end{theorem}
+\begin{proof}
+    Ще използваме теорема \ref{Subsiff} с $\delta = 1$.\\
+    Нека $(x,\dot{x})\in A\cap B((\bar{x},\dot{\bar{x}}))$.
+    Означаме $p(t) := d(\dot{x}(t), F(x(t), t))$.
+    Да забележим, че за всеки $(x_1,y_1)\in B$ имаме:
+    \[
+        p(t) \leq
+        d(\dot{x}(t), y_1(t)) + d(y_1(t), F(x_1(t),t)) + d_H(F(x_1(t), t), F(x(t), t)) \leq
+    \]
+    \[
+        \lVert \dot{x}(t) - y_1(t)\rVert + 0 + l(t) \lVert x_1(t) - x(t)\rVert
+    \]
+    откъдето
+    \[
+        \int_0^T p(t) dt \leq
+        \int_0^T \lVert \dot{x}(t) - y_1(t)\rVert + l(t) \lVert x_1(t) - x(t)\rVert dt \leq
+    \]
+    \[
+        \lVert \dot{x} - y_1 \rVert_1 + \lVert x_1 - x\rVert_\infty \int_0^T l(t)dt =
+        \lVert \dot{x} - y_1 \rVert_1 + L\lVert x_1 - x\rVert_\infty =
+        \lVert (x_1, y_1) - (x,\dot{x})\rVert
+    \]
+    понеже $(x_1,y_1)\in B$ беше произволно,
+    \[
+        \int_0^T p(t) dt \leq
+        \inf_{(\tilde{x},\tilde{y})\in B} \lVert (\tilde{x}, \tilde{y}) - (x,\dot{x})\rVert =
+        d((x,\dot{x}), B)
+    \]
+    в частност
+    \[
+        \int_0^T p(t) dt \leq
+        \lVert (\bar{x}, \dot{\bar{x}}) - (x,\dot{x})\rVert \leq 1
+    \]
+    Значи $p\in L^1([0,T])$ и можем да приложим теорема \ref{Filippov} и да получим $(\tilde{x}, \dot{\tilde{x}})\in Q$, т.ч.
+    \[
+        \lVert x(t) - \tilde{x}(t) \rVert \leq \varphi(t)
+    \]
+    \[
+        \lVert \dot{x}(t) - \dot{\tilde{x}}(t) \rVert \leq l(t) \varphi(t) + p(t)\ \text{п.н.}
+    \]
+    където
+    \[
+        \varphi(t) =
+        \int_0^t p(s) e^{\int_s^t l(\tau) d\tau}ds \leq
+        \int_0^t p(s) e^{\int_0^T l(\tau) d\tau}ds =
+        e^L \int_0^t p(s) ds.
+    \]
+    С това можем да пресметнем
+    \[
+        \lVert x - \tilde{x} \rVert_\infty =
+        \sup_{t\in [0,T]} \lVert x(t) - \tilde{x}(t)\rVert \leq
+        \sup_{t\in [0,T]} e^L \int_0^t p(s) ds =
+        e^L \int_0^T p(s) ds,
+    \]
+    \[
+        \lVert \dot{x} - \dot{\tilde{x}} \rVert_1 =
+        \int_0^T \lVert \dot{x}(s) - \dot{\tilde{x}}(s) \rVert ds \leq
+        \int_0^T \left[l(s) e^L \int_0^s p(\tau)d\tau + p(s)\right] ds \leq
+    \]
+    \[
+        e^L \int_0^T l(s) \int_0^T p(\tau)d\tau ds + \int_0^T p(s)ds =
+        (L e^L + 1) \int_0^T p(s)ds
+    \]
+    и сумарно
+    \[
+        \lVert (x, \dot{x}) - (\bar{x}, \dot{\bar{x}}) \rVert =
+        L \lVert x - \tilde{x} \rVert_\infty + \lVert \dot{x} - \dot{\tilde{x}} \rVert_1 \leq
+        % L e^L \int_0^T p(s) ds + (L e^L + 1) \int_0^T p(s)ds =
+        (2L e^L + 1)\int_0^T p(s)ds
+    \]
+    Както вече видяхме $\int_0^T p(t) dt \leq d((x,\dot{x}), B)$, така че
+    \[
+        d((x, \dot{x}), Q)\leq
+        \lVert (x, \dot{x}) - (\bar{x}, \dot{\bar{x}}) \rVert \leq
+        (2L e^L + 1) d((x,\dot{x}), B)
+    \]
+\end{proof}
+
+Това, в комбинация с Теорема \ref{BigCone} и Твърдение \ref{TIP} ни дават желаната
+\begin{theorem}
+    \small
+    \begin{displaymath}
+        \Tangent_Q\Point \supseteq A \cap \{\Vec\in\Univ \mid \Vect\in T_{\Gr}(\Pointt)\ \text{п.н. в } [0,T]\}
+    \end{displaymath}
+\end{theorem}
+

@@ -1,0 +1,321 @@
+\chapter{Предварителни сведения}
+
+\section{Многозначни изображения}
+Многозначно изображение $F:A\rightrightarrows B$ е такова, че стойностите му са подмножества на $B$, т.е. $F:A\to\mathcal{P}(B)$.
+
+\begin{definition}
+    Ще казваме, че едно многозначно изображение има непразни/затворени образи, ако за всяко $x\in A$ е вярно, че $F(x)$ е непразно/затворено.
+\end{definition}
+
+\begin{definition}[Хаусдорфово разстояние]
+    Нека $Z$ е метрично пространство и $C,D\subseteq Z$. Хаусдорфовото разстояние между $C$ и $D$ е
+\[
+    d_H(C,D) = \inf\{\varepsilon > 0  \mid D \subseteq C + \varepsilon\bar{\Ball}\ \&\ C \subseteq D+\varepsilon\bar{\Ball}\}
+\]
+Това разстояние дефинира псевдометрика върху $\mathcal{P}(Z)$.
+\end{definition}
+
+Сега като можем да мерим разстояние в $\mathcal{P}(Z)$, можем да дефинираме непрекъснатост и липшицовост както бихме очаквали.
+\begin{definition}
+    Нека $Z_1$ и $Z_2$ са метрични пространства и $F:Z_1 \rightrightarrows Z_2$.\\
+    $F$ ще наричаме непрекъсната в точка $z\in Z_1$, ако за всяко $\varepsilon > 0$ съществува $\delta > 0$, т.ч. за всяко $z'\in\Ball_\delta(z)$ е изпълнено $d_H(F(z), F(z')) < \varepsilon$.\\
+    $F$ ще наричаме непрекъсната ако е непрекъсната във всяка точка $z\in Z_1$.\\
+    $F$ ще наричаме липшицова с константа $L\in\R^+$, ако за всеки $z_1,z_2\in Z_1$ имаме $d_H(F(z_1), F(z_2)) \leq L\|z_1 - z_2\|$.
+\end{definition}
+
+За измеримост ще ни трябва следното
+\begin{definition}
+    Нека $F:A\rightrightarrows B$ и $S\subseteq B$. Първообразът на $S$ под изображението $F$ наричаме
+    \[
+        F^{-1}(S) = \{a\in A \mid F(a)\cap S \neq \emptyset\}
+    \]
+\end{definition}
+
+\begin{definition}
+    Нека $(\Omega, \mathcal{A})$ е измеримо пространство и $Z$ е метрично. Едно изображение $F:\Omega \rightrightarrows Z$ наричаме измеримо, ако $F^{-1}(B)\in\mathcal{A}$ за всяко отворено множество $B\subseteq Z$.
+\end{definition}
+
+Горната дефиниция е интересна от гледна точка на това, че в общия случай тя не влече $F^{-1}(B)\in\mathcal{A}$ за всяко борелово множество $B$ както в еднозначния случай. За изображения в $\R^n$, обаче, еквивалентността е в сила, както може да се види в Теорема 8.1.4 в \cite{SetValued}.
+
+Най-важното свойство на измеримите изображения е, че можем да им намираме измерими селекции, както е доказано в Твърдение 3.2 в \cite{DeimlingMulti} % и Теорема 8.1.3 в \cite{SetValued}
+
+\begin{theorem}
+    Нека $(\Omega, \mathcal{A})$ е измеримо пространство и $Z$ е сепарабелно банахово пространство. Нека $F:\Omega\rightrightarrows Z$ има непразни, затворени образи. Тогава съществува измерима селекция на $F$. Т.е. съществува измерима функция $z:\Omega\to Z$, т.ч.
+    \[
+        z(t)\in F(t)\ \text{за всяко}\ t\in\Omega
+    \]
+\end{theorem}
+
+Понеже голяма част от дипломната се занимава с измеримост, ще ни трябват няколко теореми свързани с измеримост:
+Първата е характеризация на измеримостта в $\R^n$. Пада се частен случай на Теорема 8.1.4 в \cite{SetValued}.
+\begin{theorem}
+    Нека $\mathcal{L}$ е лебеговата сигма алгебра в $[0,T]$, $\mathcal{B}$ е бореловата сигма алгебра в $\R^n$ и $F:[0,T]\rightrightarrows\R^n$ има непразни, затворени образи.
+    Тогава следните са еквивалентни:
+    \begin{enumerate}
+        \item $F(t)$ е измерима
+        \item графиката на $F$ е $\mathcal{L}\otimes\mathcal{B}$-измерима
+        \item съществуват измерими функции $f_n:[0,T]\to\R^n$, $n\in\N$, т.ч. $F(t)=\overline{\{f_n(t) \mid n\in\N\}}$.
+    \end{enumerate}
+\end{theorem}
+Удобни ще ни бъдат също така Теорема % TODO: find
+както и Теорема 8.2.4 в \cite{SetValued}
+
+\begin{theorem} \label{MeasurableBall}
+    Нека $v:[0,T]\to\R^n$ и $\rho:[0,T]\to\R$ са измерими изображения.
+    Тогава изображението
+    \[
+        t \mapsto v(t) + \rho(t)\bar{\Ball}
+    \]
+    също е измеримо.\\
+\end{theorem}
+\begin{theorem} \label{MeasurableCap}
+    Нека $F_n:\Omega\rightrightarrows \R^n$ за $n\geq 1$ са измерими изображения със затворени образи. Тогава изображението
+    \[
+        \left(\bigcap_{n\geq 1}F_n\right)(t) = \bigcap_{n\geq 1}F_n(t)
+    \]
+    също е измеримо. В частност за две изображения ако $F$ и $G$ са измерими със затворени образи, то и $F\cap G$ е измеримо.
+\end{theorem}
+
+Сега ще се обърнем към изображения на две променливи.
+\begin{definition}[Каратеодори изображение]
+    Нека $(\Omega, \mathcal{A})$ е измеримо пространство, а $A$ и $B$ са метрични. Изображение $F:A\times\Omega\rightrightarrows B$ наричаме Каратеодори ако за всяко $t\in\Omega$ е непрекъснато изображението $F(\cdot, t):A\rightrightarrows B$ и за всяко $x\in A$ е измеримо $F(x, \cdot):\Omega\rightrightarrows B$.
+\end{definition}
+
+За тези изображения ще ни трябва следната теорема, която може да се изведе от Твърдение 1.3.5 b) в \cite{DeimlingMulti} с помощта на Теорема 1 a) в \cite{Scorza-Dragoni}.
+\begin{theorem}
+    Нека $F:\R^n\times [0,T]\rightrightarrows \R^n$ е Каратеодори с непразни, затворени образи, $v:[0,T]\to\R^n$ е непрекъсната и $w:[0,T]\to\R^n$ е измерима. Тогава съществува измерима селекция $z(t)\in F(v(t),t)$, т.ч. $z(t)$ минимизира разстоянието от $F(v(t),t)$ до $w(t)$. Т.е. $\lVert z(t) - w(t)\rVert = d(w(t), F(v(t), t))$ за всяко $t\in [0,T]$.
+\end{theorem}
+
+Като се занимаваме с изображения на 2 променливи, измеримостта става по-сложна и ни трябват т.нар теореми в стила на Scorza-Dragoni. Ние до голяма степен избягваме нуждата от такива. Ще ни трябва само една такава теорема от \cite{Scorza-Dragoni}.
+
+\begin{theorem} \label{Scorza}
+    Нека $E\subseteq [0,T]$ е измеримо, $f:E\times\R^n\to\R^n$ е т.ч. за всяко $x\in\R^n$, $f(x, \cdot)$ е измерима и за всяко $t\in [0,T]$, $f(\cdot, t)$ е полунепрекъсната отгоре.
+    Тогава за всяко $\varepsilon > 0$ съществува компакт $E'\subseteq E$ с $\mu(E\setminus E') < \varepsilon$, т.ч. $f(x,t)$ е полунепрекъсната отгоре върху $E' \times\R^n$ и в частност измерима.
+\end{theorem}
+
+\section{За решенията на диференциални включвания}
+Една класическа лема, която се среща често при изучаването на диференциални уравнения е следната:
+
+\begin{lemma}[Gronwal]
+    Нека $\mu:[a,b]\to\R$ е непрекъсната и $\alpha:[a,b]\to\R$ и $\beta:[a,b]\to\R$ са интегруеми. Нека също
+    \[
+        \mu(t) \leq \beta(t) + \int_a^t \alpha(s) \mu(s) ds  \quad t\in[a,b]
+    \]
+    Тогава
+    \[
+        \mu(t) \leq \beta(t) + \int_a^t \beta(s)\alpha(s)e^{\int_s^t \alpha(\tau)d\tau}ds \quad t\in [a,b]
+    \]
+\end{lemma}
+
+\begin{note}
+    Ако $\varphi(t)$ е дясната страна на неравенството на\\ Gronwal и $\beta(t)$ е абсолютно непрекъсната, тогава $\varphi$ е абсолютно непрекъсната и е решението на диференциалното уравнение
+    \[
+        \left|
+        \begin{array}{ll}
+            \varphi'(t) = \alpha(t)\varphi(t) + \beta'(t)\quad t\in[a,b]\\
+            \varphi(a) = \beta(a).
+        \end{array}
+        \right.
+    \]
+\end{note}
+
+Ще искаме да ползваме лема 3.8.3 в \cite{DeimlingMulti}, но с допълнителна оценка на производната на полученото решение. Понеже това изисква допълнителни разсъждения в доказателството от книгата, ще представя тук цялото модифицирано доказателство за по-лесен прочит.
+\begin{lemma}[Филипов] \label{Filippov}
+    Нека $F:\R^n\times [0, T]\rightrightarrows \R^n$ има непразни, затворени образи, е измерима по $t$ и за всяко $t\in [0, T]$ $F(\cdot, t)$ е $l(t)$-липшицова за някое $l\in L^1([0,T])$.\\
+    Да разгледаме диференциалното включване от първа секция:
+    \[
+        (1) \left|
+        \begin{array}{ll}
+            \dot{x}(t)\in F(x(t),t) \quad \text{почти навсякъде}\\
+            x(0) = x_0\\
+            t \in [0, T].
+        \end{array}
+        \right.
+    \]
+    Нека $x:[0,T]\to\R^n$ е абсолютно непрекъсната,\\
+    $x(0)\in\bar{\Ball}_{\delta}(x_0)$ и $d(\dot{x}(t), F(x(t),t)) \leq p(t)$ п.н. за някое $p\in L^1([0,T])$.
+    Тогава съществува $\tilde{x}$ - решение на (1), т.ч:
+    \begin{enumerate}
+        \item $|x(t)-\tilde{x}(t)| \leq \varphi(t)$, за всяко $t\in[0,T]$
+        \item $|\dot{x}(t)-\dot{\tilde{x}}(t)| \leq l(t)\varphi(t) + p(t)$ п.н в $[0,T]$,
+    \end{enumerate}
+    където $\varphi$ е абсолютно непрекъснатото решение на
+    % $\varphi'(t)=l(t)\varphi(t) + p(t)$, $\varphi(0)=\delta$.
+    \[
+        \left|
+        \begin{array}{ll}
+            \varphi'(t) = l(t)\varphi(t) + p(t)\quad t\in[a,b]\\
+            \varphi(0) = \delta.
+        \end{array}
+        \right.
+    \]
+\end{lemma}
+\begin{proof}
+    Нека $x_0 = x$. Ще построим редица $x_n$ приближаваща решение на (1).\\
+    По дадено $x_n$, избираме измерима селекция $y_n$ на $F(x_n(\cdot), \cdot)$, т.ч.
+    \[
+        |y_n(t) - \dot{x}_n(t)| = d(\dot{x}_n(t), F(x_n(t), t))\ \text{п.н. в}\ [0,T],
+    \]
+    тогава взимаме
+    \[
+        x_{n+1}(t) = x_0 + \int_0^t y_n(s) ds
+    \]
+    Така $\dot{x}_{n+1} = y_n$.\\
+    Да разгледаме количеството $\psi_n(t) = |x_{n+1}(t)-x_n(t)|$. Имаме:
+    \[
+        \psi_0(t) = |x_1(t) - x(t)| \leq
+        |x_1(0) - x(0)| + |\int_0^t \dot{x}_1(s) - \dot{x}(s)\ ds| \leq
+    \]
+    \[
+        \delta + \int_0^t |\dot{x}_1(s) - \dot{x}(s)| ds =
+        \delta + \int_0^t d(\dot{x}(s), F(x(t), t)) ds \leq
+        \delta + \int_0^t p(s) ds
+    \]
+    както и за $n\geq 1$:
+    \[
+        |\dot{x}_{n+1}(t) - \dot{x}_n(t)| = d(\dot{x}_n(t), F(x_n(t), t)) \leq
+    \]
+    \[
+        d(\dot{x}_n(t), F(x_{n-1}(t), t)) + d_H(F(x_{n-1}(t), t), F(x_{n}(t), t)) \leq
+    \]
+    \[
+        0 + l(t)|x_n(t) - x_{n-1}(t)| = l(t) \psi_{n-1}(t)
+    \]
+    което ни дава и
+    \[
+        \psi_n(t) = |x_{n+1}(t) - x_n(t)| \leq
+        |\int_0^t \dot{x}_{n+1}(s) - \dot{x}_n(s) ds| \leq
+    \]
+    \[
+        \int_0^t |\dot{x}_{n+1}(s) - \dot{x}_n(s)| ds \leq
+        \int_0^t l(s) \psi_{n-1}(s) ds.
+    \]
+    Ако положим $\rho_n(t) = \sum_{i=0}^n \psi_i(t)$, за $n\geq 1$ получаваме:
+    \[
+        \rho_n(t)\leq \rho_{n+1}(t) = \psi_0(t) + \sum_{i=1}^n \psi_i(t) \leq
+        \delta + \int_0^t p(s)ds + \int_0^t l(s) \rho_n(s)ds
+    \]
+    откъдето $\rho_n(t)\leq\varphi(t)$ от теоремата на Gronwal с $\beta(t) = \delta + \int_0^t p(s) ds$ и $\alpha(t) = l(t)$.
+    В частност $\rho_n(t)$ е сходяща за всяко $t\in [0, T]$.
+
+    Сега нека $t\in [0,T]$ и $n,p\in\N$ са произволни.
+    \[
+        \lVert x_{n+p}(t) - x_n(t)\rVert \leq
+        \sum_{i=1}^p \lVert x_{n+i}(t) - x_{n+i-1}(t)\rVert \leq
+        \sum_{i=1}^\infty \psi_{n+i}(t) < \varepsilon
+    \]
+    за достатъчно големи $n$. Следователно $\{x_n(t)\}_{n\geq 1}$ е фундаментална и сходяща и значи $x_n$ клони към някаква функция $\tilde{x}:[0,T]\to\R^n$ поточково, като
+    \small
+    \[
+        \lVert \tilde{x}(t) - x(t)\rVert =
+        \lim_{n\to\infty} \lVert x_n(t) - x(t)\rVert \leq
+        \lim_{n\to\infty} \sum_{i=1}^n \lVert x_i(t) - x_{i-1}(t)\rVert =
+        \lim_{n\to\infty} \rho_n(t) \leq
+        \varphi(t)
+    \]
+
+    Аналогично
+    \[
+        \lVert \dot{x}_{n+p}(t) - \dot{x}_n(t)\rVert \leq
+        l(t)\sum_{i=1}^\infty \psi_{n+i}(t)
+    \]
+    което може да се направи малко почти навсякъде (евентуално освен върху множеството $\{l = \infty\}$ с мярка 0). Следователно $\dot{x}_n$ клони поточково почти навсякъде към $\tilde{y}:[0,T]\to\R^n$, като
+    \[
+        \lVert \tilde{y}(t) - \dot{x}(t)\rVert =
+        \lim_{n\to\infty} \lVert \dot{x}_1(t) - \dot{x}(t)\rVert + \sum_{i=2}^n \lVert \dot{x}_i(t) - \dot{x}_{i-1}(t)\rVert \leq
+    \]
+    \[
+        \lim_{n\to\infty} l(t)\rho_n(t) + p(t) \leq
+        l(t)\varphi(t) + p(t)
+    \]
+
+    Също така за функциите $\dot{x}(t)$ е изпълнено
+    \[
+        \lVert \dot{x}_n(t)\rVert \leq
+        \lVert \dot{x}_1(t)\rVert + \sum_{i=2}^n \lVert \dot{x}_i(t) -\dot{x}_{i-1}(t)\rVert \leq
+        \lVert \dot{x}_1(t)\rVert + l(t)\varphi(t) \in L^1([0,T])
+    \]
+    Следователно можем да приложим теоремата за ограничена сходимост в следното:
+    \[
+        \tilde{x}(t) =
+        \lim_{n\to\infty} x_n(t) =
+        x_0 + \lim_{n\to\infty} \int_0^t \dot{x}_n(s) ds =
+        x_0 + \int_0^t \lim_{n\to\infty} \dot{x}_n(s) ds =
+        x_0 + \int_0^t \tilde{y}(s) ds
+    \]
+    което ни дава, че $\tilde{y} = \dot{\tilde{x}}$.
+
+    Последно остана да проверим:
+    \[
+        d(\tilde{y}(t), F(\tilde{x}(t), t)) =
+        \lim_{n\to\infty} d(\dot{x}_n(t), F(x_n(t), t)) =
+        \lim_{n\to\infty} \lVert \dot{x}_n(t) - \dot{x}_{n+1}(t)\rVert = 0
+        \ \text{п.н.}
+    \]
+    което, заради затвореността на $F(\tilde{x}(t), t)$, влече $\tilde{y}(t)\in F(\tilde{x}(t), t)$ п.н. След евентуална промяна на $\tilde{y}$ върху множество с мярка 0 получаваме желаното.
+
+\end{proof}
+\begin{note}
+    За $\delta = 0$ диференциалното уравнение, определящо $\varphi$ има решение
+    \[
+        \varphi(t)=\int_0^t p(s) e^{\int_s^t l(\tau) d\tau}ds
+    \]
+\end{note}
+
+\section{Допирателен конус на Кларк}
+Един от най-основните похвати в анализа е да се разглеждат линейни апроксимации на по-сложни множества. Когато множеството е гладко, тази апроксимация е допирателната равнина. Ако множеството не е гладко, обаче, тогава взимаме т.нар. допирателен конус.
+
+В литературата има много видове допирателни конуси, всеки вършещ работа за различен вид апроксимации. Ние ще ползваме този на Кларк, който най-често се дефинира по следния начин:
+
+\begin{definition}[Допирателен конус на Кларк]
+    Нека $Z$ е банахово пространство, $S\subseteq Z$ е затворено множество и $z_0\in S$. Допирателният конус на кларк към множеството $S$ в точката $z_0$ - $\Tangent_S(z_0)$ се състой от именно тези вектори $v\in Z$, за които е изпълнено, че за всяка редица $z_n\in S$ от елементи на $S$, клоняща към $z_0$ и за всяка редица $t_n$ от положителни числа, клоняща към 0, съществува редица $v_n$, клоняща към $v$, т.ч. $z_n+t_n v_n\in S$ за всяко $n$.
+\end{definition}
+
+Ние ще ползваме 2 геометрични характеризации на този конус, които могат да бъдат намерени в \cite{Treiman}.
+\begin{theorem} \label{Geometric}
+    Нека $Z$ е банахово пространство, $S\subseteq Z$ е затворено множество и $z_0\in S$.
+    $v \in \Tangent_S(z_0)$ т.с.т.к. за всяко $\varepsilon > 0$, съществува $\delta > 0$ и $\lambda > 0$, т.ч. за всяко $z \in S \cap \Ball_{\delta}(z_0)$ и $\tau\in[0,\lambda]$, множеството $S\cap (z + \tau \Ball_{\varepsilon}(v))$ е непразно.
+\end{theorem}
+
+\begin{theorem} \label{Treiman}
+    Нека $Z$ е банахово пространство, $S\subseteq Z$ е затворено множество и $z_0\in S$.
+    $v \notin \Tangent_S(z_0)$ т.с.т.к. съществува $\varepsilon > 0$, т.ч. за всяко $\delta > 0$ съществуват $\lambda > 0$ и $z \in S \cap \Ball_{\delta}(z_0)$, т.ч. множеството $(z + (0, \lambda)\Ball_{\varepsilon}(v)) \cap S = \emptyset$
+\end{theorem}
+
+% TODO: clarify?
+Да забележим, че и в двете характеризации можем да заменим отворените кълбета със затворени, без да променим валидността им.
+
+\section{Субтрансверзалност}
+В изучаването ни на допирателни конуси на Кларк на помощ идва свойството субтрансверзалност.
+\begin{definition}[Трансверзалност на множества]
+    Нека $Z$ е метрично пространство, $C$ и $D$ са затворени подмножества на $Z$ и $x_0\in C\cap D$.
+    $C$ и $D$ ще наричаме трансверзални в точката $x_0$, ако съществува $\delta > 0$ и $K > 0$, т.ч.
+    \[
+        d(x, C\cap D) \leq K(d(x, C) + d(x, D))
+    \]
+    за всяко $x\in \Ball_{\delta}(x_0)$.
+\end{definition}
+За нашите цели по-лесно за проверяване е следното условие:
+
+% TODO: proof?
+\begin{proposition} \label{Subsiff}
+    Нека $Z$ е метрично пространство, $C$ и $D$ са затворени подмножества на $Z$ и $x_0\in C\cap D$.
+    Ако съществуват $\delta > 0$ и $K > 0$, т.ч.
+    \[
+        d(x, C\cap D) \leq K\,d(x,D)
+    \]
+    за всяко $x\in C\cap \Ball_\delta(x_0)$, тогава множествата $C$ и $D$ са субтрансверзални в $x_0$.
+\end{proposition}
+
+Ценността на това свойство се изразява в следните дефиниция и твърдение:
+\begin{definition}
+    Нека $C$ и $D$ са затворени подмножества на банахово пространство $Z$ и $x_0\in C\cap D$.
+    Казваме, че $C$ и $D$ имат \textcolor{red}{tangential intersection property} в $x_0$ за конусите $\Tangent_C(x_0)$ и $T_D(x_0)$, ако
+    \[
+        \Tangent_{C\cap D}(x_0) \supseteq T_C(x_0) \cap T_D(x_0).
+    \]
+\end{definition}
+\begin{proposition} \label{TIP}
+    Нека $C$ и $D$ са затворени подмножества на банахово пространство $Z$ и $x_0\in C\cap D$.
+    Ако $C$ и $D$ са субтрансверзални в $x_0$, то те имат \textcolor{red}{tangential intersection property} в $x_0$ за конусите $\Tangent_C(x_0)$ и $T_D(x_0)$.
+\end{proposition}
