@@ -1,4 +1,4 @@
-\chapter{Главното доказателство}
+\chapter{Основен резултат}
 
 Нека $F:\R^n\times [0,T]\rightrightarrows \R^n$ има непразни затворени образи и $F(x,t)$ е измеримо по $t$ и за всяко $t\in [0,T]$ $F(\cdot, t)$ е $l(t)$-липшицова за някое $l\in L^1([0,T])$.
 Нека $\Point\in\Univ$.
@@ -21,8 +21,8 @@
     \[
         \Gr = \overline{\{(q,f_n^q(t)) \mid n\in\N\ \&\ q\in\Q^n\}}
     \]
-    Наистина ако $(x,y)\in\Gr$, поради непрекъснатостта на $F(\cdot, t)$, съществува $\delta_n > 0$, т.ч. $F(x,t) \subseteq F(x', t) + \frac{1}{n}\bar{\Ball}$ за всяко $x'\in \Ball_{\delta_n}(x)$.
-    Да изберем $q_n\in\Q^n$ т.ч. $\lVert q_n - x\rVert \leq \min\{\delta_n, \frac{1}{n}\}$ и $y_n\in F(q_n, t)$, т.ч. $\lVert y - y_n\rVert \leq \frac{1}{n}$.
+    Наистина ако $(x,y)\in\Gr$, поради непрекъснатостта на $F(\cdot, t)$, за всяко $n\geq 1$ съществува $\delta_n \in (0, \frac{1}{n})$, т.ч. $F(x,t) \subseteq F(x', t) + \frac{1}{n}\bar{\Ball}$ за всяко $x'\in \Ball_{\delta_n}(x)$.
+    Да изберем $q_n\in\Q^n$ т.ч. $\lVert q_n - x\rVert \leq \delta_n$ и $y_n\in F(q_n, t)$, т.ч. $\lVert y - y_n\rVert \leq \frac{1}{n}$.
     Поради гъстотата на $f_i^{q_n}(t)$ в образа, можем да намерим $i_n$, т.ч. $\lVert f_{i_n}^{q_n}(t) - y_n \rVert \leq \frac{1}{n}$.
     Тогава $(q_n, f_{i_n}^{q_n}(t)) \xrightarrow[n\to\infty]{} (x,y)$.
     % \[
@@ -32,7 +32,7 @@
     %     \frac{3}{n}
     %     \xrightarrow[n\to\infty]{} 0
     % \]
-    Обратното включване следва директно от затвореността на $\Gr$.\\
+    Обратното включване следва директно от Теорема \ref{ClosedGraph}.\\
     2) Теорема $\ref{MeasurableBall}$ ни дава измеримостта на $\bar{\Ball}_{\delta}(\Pointt)$, а Теорема $\ref{MeasurableCap}$ - измеримостта на сечението.\\
     3) Да забележим, че условието
     \[
@@ -350,7 +350,6 @@
     \[
         [(x(t),y(t))+ \tau \Ball_{\varepsilon'}(\Vect)]\cap\Gr\neq\emptyset
     \]
-
     За допълнението на $\Set$ имаме
     \[
         \mu(\Set^C) \leq \mu(\bar{E}^C) + \mu(E_0) \leq
@@ -371,7 +370,6 @@
     \[
         [x(t) + \tau v(t), y(t) + \tau \mu(t) B(w(t))] \cap\Gr\neq\emptyset
     \]
-
     Строим изображението
     \[
         H(t) =
@@ -479,7 +477,7 @@
     \]
     и сумарно
     \[
-        \lVert (x, \dot{x}) - (\bar{x}, \dot{\bar{x}}) \rVert =
+        \lVert (x, \dot{x}) - (\tilde{x}, \dot{\tilde{x}}) \rVert =
         L \lVert x - \tilde{x} \rVert_\infty + \lVert \dot{x} - \dot{\tilde{x}} \rVert_1 \leq
         % L e^L \int_0^T p(s) ds + (L e^L + 1) \int_0^T p(s)ds =
         (2L e^L + 1)\int_0^T p(s)ds
@@ -487,7 +485,7 @@
     Както вече видяхме $\int_0^T p(t) dt \leq d((x,\dot{x}), B)$, така че
     \[
         d((x, \dot{x}), Q)\leq
-        \lVert (x, \dot{x}) - (\bar{x}, \dot{\bar{x}}) \rVert \leq
+        \lVert (x, \dot{x}) - (\tilde{x}, \dot{\tilde{x}}) \rVert \leq
         (2L e^L + 1) d((x,\dot{x}), B)
     \]
 \end{proof}
