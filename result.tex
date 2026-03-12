@@ -11,7 +11,7 @@
         \item за всяко $\delta > 0$ изображението $G_{\delta}(t) := \bar{\Ball}_{\delta}(\Pointt)\cap\Gr$
         \item за всеки $r,s > 0$ множеството
             \begin{align*}
-                D_{r,s} = \{t\in [0,T]\mid\ &\forall z\in\bar{\Ball}_{r}(\Pointt)\cap\Gr\ \forall \tau\in(0,s)\\
+                D_{r,s} = \{t\in [0,T]\mid\ \forall z\in\bar{\Ball}_{r}(\Pointt)&\cap\Gr\ \forall \tau\in(0,s)\\
                   &[z + \tau \bar{\Ball}_{\varepsilon}(\Vect)]\cap\Gr\neq\emptyset\}.
             \end{align*}
     \end{enumerate}
@@ -57,27 +57,27 @@
     Понеже $f$ е непрекъсната по $(z,\tau)$, то съществува $U$ - околност на $(z_0, \tau_0)$ в $G_r(t)\times (0,s)$, т.ч. $f(z,\tau,t) > \alpha$ за всяко $(z,\tau)\in U$.
     Поради гъстотата можем да намерим $n\in\N$ и $\tau\in\Q$, т.ч. $(h_n(t), \tau)\in U$ и тогава $f(h_n(t), \tau, t) > \alpha$.
     Другото включване е ясно.
-
 \end{proof}
 
 \begin{lemma} \label{L2}
     Нека $(v,w)\in\Univ$, $E\subseteq [0,T]$ е измеримо и $\nu > 0$. Тогава съществува компакт $E'\subseteq E$ с $\mu(E\setminus E') < \nu$, т.ч. са измерими:
     \begin{enumerate}
-        \item за всеки $\delta,\lambda,\varepsilon > 0$ изображенията $H_{\delta,\lambda,\varepsilon}:E'\rightrightarrows \R^n$ зададени с
+        \item за всеки $\delta,\lambda,\varepsilon > 0$ изображенията $H_{\delta,\lambda,\varepsilon}:E'\rightrightarrows \R^{2n}$ зададени с
             \[
                 H_{\delta,\lambda,\varepsilon}(t) := \{z\in G_{\delta}(t) \mid [z + (0,\lambda)\Ball_{\varepsilon}(\Vect)]\cap\Gr = \emptyset\},
             \]
         \item за всяко $\delta,\lambda,\varepsilon>0$ множеството
             \begin{align*}
-                L_{\delta,\lambda,\varepsilon}=\{t\in E' \mid\ &\exists z\in \Ball_{\delta}(\Pointt)\cap\Gr\\
+                L_{\delta,\lambda,\varepsilon}=\{t\in E' \mid\ &\exists z\in \clBall_{\delta}(\Pointt)\cap\Gr\\
                    &[z + (0, \lambda)\Ball_{\varepsilon}(\Vect)\cap\Gr] = \emptyset\},
             \end{align*}
         \item за всяко $s>0$ множеството
             \begin{align*}
-                E_s = \{t\in E' \mid \forall \delta > 0&\ \exists z \in G_{\delta}(t)\ \exists \lambda > 0\\
+                E_s = \{t\in E' \mid \forall \delta > 0&\ \exists z \in \clBall_{\delta}(\Pointt)\cap\Gr\ \exists \lambda > 0\\
                  &[z + (0, \lambda)\Ball_s(\Vect)]\cap\Gr = \emptyset\}.
                 \end{align*}
     \end{enumerate}
+    Също така изображенията $H_{\delta,\lambda,\varepsilon}$ имат затворени образи върху $E'$.
 \end{lemma}
 \begin{proof}
     Да забележим първо, че условието
@@ -92,28 +92,36 @@
     Измеримостта се показва аналогично на горната теорема.
     За полунепрекъснатостта е достатъчно да забележим, че ако $f(x,y)$ е непрекъсната по $x$,\\ $g(x) = \inf_{y\in A} f(x,y)$ и $\varepsilon > 0$, имаме
     \[
-        g(x) + \varepsilon < f(x,y_0) = \limsup_{x'\to x} f(x',y_0) \leq \limsup_{x'\to x} g(x')
+        g(x) + \varepsilon > f(x,y_0) = \limsup_{x'\to x} f(x',y_0) \geq \limsup_{x'\to x} g(x')
     \]
     Оставяйки $\varepsilon\to 0$, получаваме искания резултат.
-    Тогава според теорема \ref{Scorza} съществува компакт $E'\subseteq E$ с $\mu(E\setminus E')<\nu$, т.ч. функцията $g$ е измерима върху $E'\times\R^n $.
+    Тогава според теорема \ref{Scorza} съществува компакт $E'\subseteq E$ с $\mu(E\setminus E')<\nu$, т.ч. функцията $g$ е измерима върху $E'\times\R^{2n}$.
     \begin{enumerate}
         \item
             Графиката на $H_{\delta,\lambda,\varepsilon}$ можем да представим като
-            \small{
             \[
                 Gr H_{\delta,\lambda,\varepsilon} = \{(t,z) \mid (t,z)\in Gr G_{\delta}\ \&\ g(t,z)\geq\varepsilon\} =
-                Gr G_{\delta} \cap g\vert_{E'\times\R^n}^{-1}([\varepsilon, \infty))
+                Gr G_{\delta} \cap g\vert_{E'\times\R^{2n}}^{-1}([\varepsilon, \infty)),
             \]
-            }
             което е $\mathcal{L}\otimes\mathcal{B}$-измеримо.
+            Затвореността е ясна от представянето $H_{\delta,\lambda,\varepsilon}(t) = G_\delta(t) \cap g(t,\cdot)^{-1}([\varepsilon,\infty))$ на $H_{\delta,\lambda,\varepsilon}(t)$ и фактът, че $g$ е полунепрекъсната отгоре по $z$.
+            % Сега да видим затвореността.\\
+            % Нека $z_n\in H_{\delta,\lambda,\varepsilon}(t) = G_\delta(t) \cap \{z \mid g(t,z) \geq\varepsilon\}$ и $z_n\to z_0$.
+            % Понеже $G_\delta(t)$ е затворено, $z_0\in G_\delta(t)$. Също така за всяко $n\in\N$, имаме $g(t,z_n)\geq\varepsilon$. От полунепрекъснатостта отгоре получаваме
+            % \[
+            %     g(t,z_0) \geq \limsup_{n\to\infty} g(t,z_n) \geq\varepsilon.
+            % \]
+            % Така $z_0\in H_{\delta,\lambda,\varepsilon}(t)$.
         \item
+            Имаме следното представяне
             \[
                 L_{\delta,\lambda,\varepsilon} =
                 \{t\in E' \mid \exists z\in G_{\delta}(t)\ g(t,z)\geq\varepsilon\}=
                 dom(H_{\delta,\lambda,\varepsilon}),
             \]
-            където $dom(H_{\delta,\lambda,\varepsilon}) = H_{\delta,\lambda,\varepsilon}^{-1}(\R^n)$ са измерими.
+            където $dom(H_{\delta,\lambda,\varepsilon}) = H_{\delta,\lambda,\varepsilon}^{-1}(\R^{2n})$ са измерими.
         \item
+            Имаме следното представяне
             \[
                 E_s =
                 \bigcap_{\delta\in\Q^+} \bigcup_{\lambda\in\Q^+} \{t\in E' \mid \exists z\in G_{\delta}(t)\ g(t,z)\geq s\} =
@@ -133,7 +141,7 @@
 \begin{proof}
     % фаза 1: да ограничим епсилон
     Да допуснем, че $(v,w)\in\Univ$ не е в дясното множество.
-    Тогава според теорема \ref{Treiman} съществува $E\subseteq [0,T]$ с положителна мярка, т.ч. за всяко $t\in E$ съществува $\varepsilon_t > 0$, т.ч. за всяко $\delta > 0$ съществуват $(x,y)\in \Ball_\delta(\Pointt)\cap\Gr$ и $\lambda > 0$, т.ч.
+    Тогава според теорема \ref{Treiman} съществува $E\subseteq [0,T]$ с положителна мярка, т.ч. за всяко $t\in E$ съществува $\varepsilon_t > 0$, т.ч. за всяко $\delta > 0$ съществуват $(x,y)\in \clBall_\delta(\Pointt)\cap\Gr$ и $\lambda > 0$, т.ч.
     \[
         [(x,y) + (0, \lambda)\Ball_{\varepsilon_t}(\Vect)]\cap\Gr = \emptyset
     \]
@@ -154,25 +162,25 @@
         0 < \mu(E) = \mu\left(\bigcup_{n=1}^{\infty} E_{\frac{1}{n}}\right) =
         \lim_{n\to\infty} \mu(E_{\frac{1}{n}})
     \]
-    и значи съществува някое $\varepsilon_0 = \frac{1}{n_0} > 0$, т.ч. $\mu(\bar{E}=E_{\varepsilon_0}) > 0$.\\
+    и значи съществува някое $\varepsilon_0 := \frac{1}{n_0} > 0$, т.ч. $\mu(\bar{E}:=E_{\varepsilon_0}) > 0$.\\
     Така за всяко $t\in \bar{E}$ и $\delta > 0$ имаме:
     \begin{align*}
-        \exists z \in \Ball_{\delta}(\Pointt)\cap&\Gr\ \exists \lambda > 0\\
+        \exists z \in \clBall_{\delta}(\Pointt)\cap&\Gr\ \exists \lambda > 0\\
         &[z + (0, \lambda)\Ball_{\varepsilon_0}(\Vect)]\cap\Gr = \emptyset.
     \end{align*}
 
     Нека вземем $\delta = \frac{1}{k}$. Тогава за всяко $k\in\N$ и $t\in\bar{E}$ получаваме
     \begin{align*}
-        \exists z \in \Ball_{\frac{1}{k}}(\Pointt)\cap&\Gr\ \exists \lambda > 0\\
+        \exists z \in \clBall_{\frac{1}{k}}(\Pointt)\cap&\Gr\ \exists \lambda > 0\\
         &[z + (0, \lambda)\Ball_{\varepsilon_0}(\Vect)]\cap\Gr  = \emptyset.
     \end{align*}
 
     % фаза 2: да ограничим ламбда отдолу и да построим z
-    Нека $\bar{E}_0 = \bar{E}$. Строим множества $\bar{E}_k\subseteq \bar{E}$,$k\geq1$, реални числа $\{\lambda_k\}_{k\geq 1}$ и измерими функции $\{z_k\}_{k \geq 1}$ по следния начин:\\
-    Нека имаме $\bar{E}_k$.
+    Нека $\bar{E}_0 = \bar{E}$. За $k\geq1$ строим множества $\bar{E}_k\subseteq \bar{E}$, реални числа $\lambda_k > 0$ и измерими функции $z_k:\bar{E}_k\to\R^{2n}$ по следния начин:\\
+    Нека имаме $\bar{E}_k$ за някое $k\geq 0$.
     Дефинираме
     \begin{align*}
-        \Lambda_s=\{&t\in\bar{E}_k \mid \exists z\in \Ball_{\frac{1}{k+1}}(\Pointt)\cap\Gr\\
+        \Lambda_s=\{&t\in\bar{E}_k \mid \exists z\in \clBall_{\frac{1}{k+1}}(\Pointt)\cap\Gr\\
         &[z + (0, s)\Ball_{\varepsilon_0}(\Vect)]\cap\Gr = \emptyset\} =
         \bar{E}_k \cap L_{\frac{1}{k+1},s,\varepsilon_0}.
     \end{align*}
@@ -191,8 +199,7 @@
     \[
         \mu(\bar{E}_k\setminus\Lambda_\frac{1}{n_0})<\frac{\mu(\bar{E})}{2^{k+1}}.
     \]
-    Дефинираме $\lambda_{k+1} = \frac{1}{n_0}$, $\bar{E}_{k+1}=\Lambda_{\lambda_{k+1}}$
-    % TODO: fix me
+    Дефинираме $\lambda_{k+1} := \frac{1}{n_0}$, $\bar{E}_{k+1} := \Lambda_{\lambda_{k+1}}$
     и взимаме измерима селекция $z_{k+1}(t) = (x_{k+1}(t),y_{k+1}(t)) \in H_{\frac{1}{k+1},\lambda_{k+1},\varepsilon_0}(t)$.\\
 
     За така построените множества е вярно, че:
@@ -217,7 +224,7 @@
     Ще използваме теорема \ref{Treiman} за да покажем, че $\Vec\notin \Tangent_B(\Point)$.\\
     % фаза 3: довършваме
     Нека $\varepsilon'=\frac{\varepsilon_0}{2}\min\{L,\frac{\mu(\Set)}{2}\}$ и $\delta > 0$ е произволно.\\
-    Дефинираме $(\tilde{x}_k, \tilde{y}_k) \in\Univ$ като
+    За всяко $k\geq 1$ дефинираме $(\tilde{x}_k, \tilde{y}_k) \in\Univ$ като
     \[
         (\tilde{x}_k(t), \tilde{y}_k(t))=
         \begin{cases}
@@ -262,7 +269,7 @@
     откъдето $\mu(\Set\setminus C)>0$.\\
     За всяко $t\in\Set\setminus C$ имаме
     \[
-        \lVert p(t) - v(t) \rVert < \frac{\varepsilon_0}{2}
+        \lVert p(t) - v(t) \rVert \leq \frac{\varepsilon_0}{2}
         \quad \text{и} \quad
         \lVert q(t) - w(t) \rVert < \frac{\varepsilon_0}{2}
     \]
@@ -274,7 +281,7 @@
     откъдето $(\tilde{x}_k, \tilde{y}_k) + (0,\lambda_k)(p,q)\cap B = \emptyset$. С това доказахме теоремата.
 \end{proof}
 
-Да забележим, че в доказателството на тази теорема никъде не ползвахме липшицовостта на изображението. Това не може да се каже за другата посока:
+Да забележим, че в доказателството на тази теорема ползвахме само непрекъснатостта по $x$. Липшицовостта на изображението ни трябва само за другата посока:
 
 \begin{proposition}
     За всяко $(\bar{x},\bar{y})\in B$
@@ -287,7 +294,7 @@
     Да вземем произволно $\Vec$ от дясната страна.
     Ще ползваме теорема \ref{Geometric} за да покажем, че $\Vec\in \Tangent_B(\Point)$. Нека $\varepsilon > 0$.
 
-    Понеже $l(t)$ и $\lVert w(t)\rVert$ са сумируеми, това означава, че са и равномерно интегруеми. В частност съществува $\nu > 0$, т.ч.
+    Понеже $l(t)$ и $\lVert w(t)\rVert$ са сумируеми, това означава, че съществува $\nu > 0$, т.ч.
     \[
         \int_S l(t) dt < \frac{\varepsilon}{3(\lVert v \rVert_{\infty} + 1)}
         \text{ и }
@@ -299,7 +306,7 @@
     Имаме множество $E$ с $\mu(E)=T$, т.ч. за всяко $t\in E$, $\Vect\in \Tangent_{\Gr}(\Pointt)$.
     Нека $\varepsilon' = \frac{\varepsilon}{3(L+T)}$, тогава от теорема \ref{Geometric} за всяко $t\in E$ съществуват $\delta > 0$ и $\lambda > 0$, т.ч. за всеки $(x,y)\in \bar{\Ball}_{\delta}(\Pointt)$ и $\tau\in(0,\lambda)$ имаме
     \[
-        [(x,y)+ \tau \Ball_{\varepsilon'}(\Vect)]\cap\Gr\neq\emptyset
+        [(x,y)+ \tau \clBall_{\varepsilon'}(\Vect)]\cap\Gr\neq\emptyset
     \]
     Да разгледаме множествата
     \begin{align*}
@@ -323,7 +330,7 @@
         \mu\left(\bigcup_{n = 1}^{\infty} \bigcup_{m = 1}^{\infty} \Delta_{\frac{1}{n},\frac{1}{m}}\right) =
         \lim_{n\to\infty}\lim_{m\to\infty} \mu(\Delta_{\frac{1}{n},\frac{1}{m}})
     \]
-    и значи съществуват $\delta_0 = \frac{1}{n_0}$ и $\lambda_0 = \frac{1}{m_0}$, т.ч.
+    и значи съществуват $\delta_0 := \frac{1}{n_0}$ и $\lambda_0 := \frac{1}{m_0}$, т.ч.
     \[
         \mu(\bar{E} := \Delta_{\delta_0,\lambda_0}) \geq T - \frac{\nu}{2}.
     \]
@@ -348,7 +355,7 @@
     \]
     и значи $(x(t), y(t))\in \bar{\Ball}_{\delta_0}(\Pointt)$. Но това значи, че
     \[
-        [(x(t),y(t))+ \tau \Ball_{\varepsilon'}(\Vect)]\cap\Gr\neq\emptyset
+        [(x(t),y(t))+ \tau \clBall_{\varepsilon'}(\Vect)]\cap\Gr\neq\emptyset
     \]
     За допълнението на $\Set$ имаме
     \[
@@ -368,7 +375,7 @@
     \]
     Да положим $\mu(t) := \lVert w(t)\rVert + l(t)(\lVert v(t)\rVert + 1)$. Горната оценка ни дава
     \[
-        [x(t) + \tau v(t), y(t) + \tau \mu(t) B(w(t))] \cap\Gr\neq\emptyset
+        [x(t) + \tau v(t), y(t) + \tau \mu(t)\clBall(w(t))] \cap\Gr\neq\emptyset
     \]
     Строим изображението
     \[
@@ -379,7 +386,7 @@
         \end{cases}
         .
     \]
-    От горните съображения $H$ е измеримо с непразни образи. Тогава можем да изберем измерима селекция $z(t)\in H(t)$. Избираме изображенията $p$ и $q$, така че да изпълняват $z(t) = (x(t) + \tau p(t), y(t) + \tau q(t))$.
+    От горните съображения $H$ е измеримо с непразни затворени образи. Тогава можем да изберем измерима селекция $z(t)\in H(t)$. Избираме изображенията $p$ и $q$, така че да изпълняват $z(t) = (x(t) + \tau p(t), y(t) + \tau q(t))$.
     За така избраните изображения е ясно, че $(x,y) + \tau (p,q)\in B$. Остава да показжем само, че $(p,q)\in \bar{\Ball}_{\varepsilon}(\Vec)$. Пресмятаме:
     \[
         \lVert (p, q) - (v, w)\rVert =
